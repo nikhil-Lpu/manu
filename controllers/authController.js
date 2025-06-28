@@ -5,7 +5,10 @@ const jwt = require("jsonwebtoken");
 // ✅ Register user
 exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
-
+  res.setHeader('Access-Control-Allow-Origin', 'https://manui.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   try {
     if (!name || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
