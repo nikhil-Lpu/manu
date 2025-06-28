@@ -12,12 +12,23 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: 'https://manui.vercel.app', // Or '*' to allow all origins (not recommended for production)
-  credentials: true,               // If using cookies or auth headers
-}));
 
 app.use(express.json());
+const allowedOrigins = ['http://localhost:5173', 'https://manui.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
+app.options('*', cors()); // ✅ handles preflight
+
 
 // API Routes
 app.use("/api/auth", require("./routes/authRoutes"));
