@@ -13,7 +13,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: '*', // Or '*' to allow all origins (not recommended for production)
+  origin: 'https://manui.vercel.app/', // Or '*' to allow all origins (not recommended for production)
   credentials: true,               // If using cookies or auth headers
 }));
 
