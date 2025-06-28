@@ -13,12 +13,12 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'https://manui.vercel.app/', // Or '*' to allow all origins (not recommended for production)
+  origin: 'https://manui.vercel.app', // Or '*' to allow all origins (not recommended for production)
   credentials: true,               // If using cookies or auth headers
 }));
 
 app.use(express.json());
-
+app.options("*", cors()); 
 // API Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/products", require("./routes/productRoutes"));
